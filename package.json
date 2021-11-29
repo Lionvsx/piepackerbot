@@ -28,6 +28,7 @@
     "fs-extra": "^10.0.0",
     "mongoose": "^6.0.12",
     "standard-version": "^9.3.2",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "https": "^1.0.0"
   }
 }
