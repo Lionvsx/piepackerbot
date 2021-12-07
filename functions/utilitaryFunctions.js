@@ -10,7 +10,8 @@ module.exports = {
     sleep,
     getDuplicates,
     substractArrays,
-    chunkArray
+    chunkArray,
+    updateGuildMemberCache
 }
 /**
  * 
@@ -130,4 +131,22 @@ const sleep = (ms) => {
         res.push(chunk);
     }
     return res;
+}
+
+/**
+ * 
+ * @param {object} guild 
+ * @returns {object} guild members cache
+ */
+ const updateGuildMemberCache = async (guild) => {
+    const guildMembersCache = guild.members.cache
+
+    if (guildMembersCache.size != guild.memberCount) {
+        guild.client.warn('Cached incomplete, updated', {
+            updated: guild.memberCount - guildMembersCache.size,
+            success: true
+        })
+        await guild.members.fetch();
+    }
+    return guild.members.cache
 }
