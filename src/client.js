@@ -30,7 +30,6 @@ class client extends Client {
         this.interactions = new Map();
         this.config = new Map();
         this.consoleLogger = new Logger('client');
-        this.loadingEmoji = undefined;
     }
 
     /**
@@ -48,24 +47,38 @@ class client extends Client {
         logData ? this.consoleLogger.log(message, 'warn') : this.consoleLogger.log(message, 'warn', logData);
     }
     replySuccess(object, content) {
-        const successEmoji = this.emojis.cache.get('') ?? '✅';
-        if (object instanceof Interaction) return object.reply(`**${successEmoji} | **${content}`)
-        if (object instanceof Message) return object.reply(`**${successEmoji} | **${content}`)
-        if (object instanceof TextChannel) return object.send(`**${successEmoji} | **${content}`)
+        if (object instanceof Interaction) return object.reply(`**${this.successEmoji} | **${content}`)
+        if (object instanceof Message) return object.reply(`**${this.successEmoji} | **${content}`)
+        if (object instanceof TextChannel) return object.send(`**${this.successEmoji} | **${content}`)
     }
 
     replyError(object, content) {
-        const errorEmoji = this.emojis.cache.get('') ?? '❌';
-        if (object instanceof Interaction) return object.reply(`**${errorEmoji} | **${content}`)
-        if (object instanceof Message) return object.reply(`**${errorEmoji} | **${content}`)
-        if (object instanceof TextChannel) return object.send(`**${errorEmoji} | **${content}`)
+        if (object instanceof Interaction) return object.reply(`**${this.errorEmoji} | **${content}`)
+        if (object instanceof Message) return object.reply(`**${this.errorEmoji} | **${content}`)
+        if (object instanceof TextChannel) return object.send(`**${this.errorEmoji} | **${content}`)
     }
 
     replyWarning(object, content) {
-        const warningEmoji = this.emojis.cache.get('') ?? '⚠';
-        if (object instanceof Interaction) return object.reply(`**${warningEmoji} | **${content}`)
-        if (object instanceof Message) return object.reply(`**${warningEmoji} | **${content}`)
-        if (object instanceof TextChannel) return object.send(`**${warningEmoji} | **${content}`)
+        if (object instanceof Interaction) return object.reply(`**${this.warningEmoji} | **${content}`)
+        if (object instanceof Message) return object.reply(`**${this.warningEmoji} | **${content}`)
+        if (object instanceof TextChannel) return object.send(`**${this.warningEmoji} | **${content}`)
+    }
+
+
+    get loadingEmoji() {
+        return this.emojis.cache.get('') ?? '🔄️';
+    }
+
+    get successEmoji() {
+        return this.emojis.cache.get('') ?? '✅';
+    }
+
+    get errorEmoji() {
+        return this.emojis.cache.get('') ?? '❌';
+    }
+
+    get warningEmoji() {
+        return this.emojis.cache.get('') ?? '⚠️';
     }
 
 
