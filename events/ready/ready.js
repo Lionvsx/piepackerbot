@@ -11,7 +11,6 @@ module.exports = class ReadyEvent extends BaseEvent {
     }
 
     async run(client) {
-        client.loadingEmoji = client.emojis.cache.get('741276138319380583') ?? '🔄️';
         client.user.setPresence({
             activities: [{
                 name: "Test",
@@ -63,9 +62,5 @@ module.exports = class ReadyEvent extends BaseEvent {
             }
         }
         client.log('Successfully reloaded application (/) commands.');
-
-        
-
-        
     }
 }
