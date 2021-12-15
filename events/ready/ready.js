@@ -1,4 +1,5 @@
 const BaseEvent = require('../../utils/structures/BaseEvent');
+const registerGuild = require('../../functions/registerGuild')
 
 const Guild = require('../../src/schemas/GuildSchema')
 const { showCommandLoad } = require('../../utils/register')
@@ -18,27 +19,19 @@ module.exports = class ReadyEvent extends BaseEvent {
             }],
             status: "online"
         })
-        console.log(`Bot ${client.user.username} loaded and ready !`)
+        client.log(`Bot ${client.user.username} loaded and ready !`)
         await showCommandLoad()
 
-        const commands = []
-        for (const [name, command] of client.commands) {
-            commands.push(command.builder.toJSON())
-        }
+        const commands = client.commandsJSON
 
         for (const [key, value] of client.guilds.cache) {
-            const guildConfig = await Guild.findOne({ guildId: key });
+            let guildConfig = await Guild.findOne({ guildId: key });
             if (guildConfig) {
                 client.config.set(key, guildConfig)
                 client.log(`Loaded config data for guild : ${value.name}`)
             } else {
-                Guild.create({
-                    guildId: key,
-                    guildName: value.name
-                }, async (err) => {
-                    if (err) throw err && client.log(`There was an error trying to save GUILD : ${value.name} to the database !`)
-                    else client.error(`⚠️ Guild : ${value.name} wasn't saved in the database, created new entry ! ⚠️`)
-                })
+                client.error(`Guild : ${value.name} wasn't saved in the database, starting register function`)
+                registerGuild(client, value);
             }
         }
         client.log('Started refreshing application (/) commands.');
