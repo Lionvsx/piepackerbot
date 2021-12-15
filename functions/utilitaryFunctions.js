@@ -1,18 +1,7 @@
 const https = require('https')
+const fs = require('fs-extra')
 
-module.exports = {
-    removeDivider,
-    removeEmojis,
-    getEmoji,
-    getDivider,
-    readFile,
-    downloadFile,
-    sleep,
-    getDuplicates,
-    substractArrays,
-    chunkArray,
-    updateGuildMemberCache
-}
+
 /**
  * 
  * @param {String} string 
@@ -149,4 +138,18 @@ const sleep = (ms) => {
         await guild.members.fetch();
     }
     return guild.members.cache
+}
+
+module.exports = {
+    removeDivider,
+    removeEmojis,
+    getEmoji,
+    getDivider,
+    readFile,
+    downloadFile,
+    sleep,
+    getDuplicates,
+    substractArrays,
+    chunkArray,
+    updateGuildMemberCache
 }
