@@ -38,13 +38,13 @@ class client extends Client {
      * @param logData {JSON}
      */
     log(message, logData = undefined) {
-        logData ? this.consoleLogger.log(message, 'info') : this.consoleLogger.log(message, 'info', logData);
+        this.consoleLogger.log(message, 'info', logData);
     }
     error(message, logData = undefined) {
-        logData ? this.consoleLogger.log(message, 'error') : this.consoleLogger.log(message, 'error', logData);
+        this.consoleLogger.log(message, 'error', logData);
     }
     warning(message, logData = undefined) {
-        logData ? this.consoleLogger.log(message, 'warn') : this.consoleLogger.log(message, 'warn', logData);
+        this.consoleLogger.log(message, 'warn', logData);
     }
     replySuccess(object, content) {
         if (object instanceof Interaction) return object.reply(`**${this.successEmoji} | **${content}`)
@@ -79,6 +79,14 @@ class client extends Client {
 
     get warningEmoji() {
         return this.emojis.cache.get('') ?? '⚠️';
+    }
+
+    get commandsJSON() {
+        const commands = []
+        for (const [name, command] of this.commands) {
+            commands.push(command.builder.toJSON())
+        }
+        return commands;
     }
 
 
