@@ -18,11 +18,7 @@ const GuildSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
-    logChannelId: String,
-    home: {
-        type: Boolean,
-        default: false
-    }
+    logChannelId: String
 });
 
 module.exports = mongoose.model('Guild', GuildSchema);

@@ -1,5 +1,5 @@
 const BaseCommand = require('../../utils/structures/BaseCommand')
-const { MessageEmbed} = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
 module.exports = class HelpCommand extends BaseCommand {

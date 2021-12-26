@@ -11,7 +11,7 @@ module.exports = class guildDeleteEvent extends BaseEvent {
         if (!DBGuild) return client.error(`Leaving a guild not stored in Database !`);
         else {
             await Guild.deleteOne({guildId: guild.id}, async (err) => {
-                if (err) throw err;
+                if (err) client.error('An error occured while trying to delete guild from DB', err);
                 else client.log(`Bot ${client.user.username} left GUILD : ${guild.name} !`);
             });
         }

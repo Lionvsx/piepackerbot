@@ -12,7 +12,7 @@ const {
     useNewUrlParser: true,
     useUnifiedTopology: true
   }).then(connection => {
-    console.log(`Connected to MongoDB`)
+    client.log(`Connected to MongoDB`)
   }).catch(err => {
     if (err) throw err;
   });

@@ -3,11 +3,15 @@ const fs = require('fs-extra').promises;
 const BaseCommand = require('./structures/BaseCommand');
 const BaseEvent = require('./structures/BaseEvent');
 const BaseInteraction = require('./structures/BaseInteraction')
+
 const ascii = require('ascii-table');
 let table = new ascii('Commands');
 let interactionTable = new ascii('Interactions');
 table.setHeading('Command', 'Status')
 interactionTable.setHeading('Interaction', 'Status')
+
+const Logger = require('../utils/services/logger')
+const registerLogger = new Logger('register');
 
 async function registerCommands(client, dir = '') {
   const filePath = path.join(__dirname, dir);
@@ -69,12 +73,12 @@ async function showCommandLoad() {
   if (table.__rows.length !== 0) {
     console.log(table.toString());
   } else {
-    console.log(`No commands to load !`)
+    registerLogger.info(`No commands to load !`)
   }
   if (interactionTable.__rows.length !== 0) {
     console.log(interactionTable.toString());
   } else {
-    console.log(`No interactions to load !`)
+    registerLogger.info(`No interactions to load !`)
   }
 }
 
