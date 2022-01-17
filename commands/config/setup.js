@@ -6,7 +6,7 @@ module.exports = class SetupCommand extends BaseCommand {
     constructor() {
         super('setup', 'config', {
             usage: 'setup',
-            description: 'Open setup utilities',
+            description: 'Setup utilities for Piepacker Bot functions',
             categoryDisplayName: '⚙️ Config'
         }, {
             clientPermissions: [Permissions.FLAGS.ADMINISTRATOR],
@@ -21,6 +21,10 @@ module.exports = class SetupCommand extends BaseCommand {
     }
     async run(client, interaction, options) {
         
+        //Create Reaction Role
+        //Create Ticket Opening Embed
+        //Create Auto Voice channels??
+        //Change Bot activity
 
     }
 }
