@@ -16,6 +16,7 @@ const TicketSchema = new mongoose.Schema({
     },
     name: String,
     authorId: String,
+    index: Number,
     guildId: {
         type: String,
         required: true
