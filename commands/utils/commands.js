@@ -26,7 +26,7 @@ module.exports = class CommandsCommand extends BaseCommand {
     }
     async run(client, interaction, options) {
         const prefix = '/'
-        const categoryOption = interaction.options.get('category')
+        const categoryOption = options.get('category')
         let array = Array.from(client.commands)
         if (!categoryOption) {
             let categoriesEmbed = new MessageEmbed()
