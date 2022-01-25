@@ -10,5 +10,3 @@ const promptChannel = (channel, content) => {
 const promptMessageContent = (channel, content) => {
 
 }
-
-const promptGuildMember
