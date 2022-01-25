@@ -45,11 +45,11 @@ module.exports = class CommandsCommand extends BaseCommand {
                 embeds: [categoriesEmbed]
             })
         } else if (categoryOption) {
-            let selectedCategory = array.filter(cmd => cmd[1].category === categoryOption.value.toLowerCase())
-            if (selectedCategory.length > 0) {
+            let selectedCategoryCommands = array.filter(cmd => cmd[1].category === categoryOption.value.toLowerCase())
+            if (selectedCategoryCommands.length > 0) {
                 let display = []
                 let lengthDiv = 23
-                selectedCategory.forEach(cmd => {
+                selectedCategoryCommands.forEach(cmd => {
                     let spareLength = lengthDiv - cmd[1].name.length
                     let spare = Array(spareLength).fill(' ').join('')
                     display.push(`- ${cmd[1].name}${spare}:: ${cmd[1].help.description}`)
