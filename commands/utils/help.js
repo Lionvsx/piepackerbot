@@ -5,7 +5,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 module.exports = class HelpCommand extends BaseCommand {
     constructor() {
         super('help', 'utilities', {
-            usage: 'help',
+            usage: 'help [command]',
             description: 'Display help information about commands',
             categoryDisplayName: '🔧 Utilities'
         }, {
