@@ -26,12 +26,12 @@ module.exports = class CommandsCommand extends BaseCommand {
     }
     async run(client, interaction, options) {
         const prefix = '/'
-        const categoryOption = interaction.options.get('category')
+        const categoryOption = options.get('category')
         let array = Array.from(client.commands)
         if (!categoryOption) {
             let categoriesEmbed = new MessageEmbed()
                 .setColor('#9b59b6')
-                .setAuthor(`${client.user.username}'s commands`, client.user.avatarURL())
+                .setAuthor({ name: `${client.user.username}'s commands`, iconURL: client.user.avatarURL() })
                 .setDescription(`To view all commands in a category type :
                 \`\`\`${prefix}commands <category>\`\`\``)
 

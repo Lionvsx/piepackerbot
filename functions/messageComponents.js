@@ -18,7 +18,7 @@ function createButton(buttonId, buttonText, buttonStyle, emoji = undefined) {
         .setLabel(buttonText)
         .setStyle(buttonStyle)
     emoji ?? button.setEmoji(emoji)
-    
+
     return button;
 }
 
