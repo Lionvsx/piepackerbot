@@ -36,13 +36,27 @@ class client extends Client {
      *
      * @param message {String}
      * @param logData {JSON}
+     * @return {void}
      */
     log(message, logData = undefined) {
         this.consoleLogger.log(message, 'info', logData);
     }
+
+    /**
+     *
+     * @param message {String}
+     * @param logData {JSON}
+     * @return {void}
+     */
     error(message, logData = undefined) {
         this.consoleLogger.log(message, 'error', logData);
     }
+    /**
+     *
+     * @param message {String}
+     * @param logData {JSON}
+     * @return {void}
+     */
     warning(message, logData = undefined) {
         this.consoleLogger.log(message, 'warn', logData);
     }
@@ -66,7 +80,7 @@ class client extends Client {
 
 
     get loadingEmoji() {
-        return this.emojis.cache.get('') ?? '🔄️';
+        return this.emojis.cache.get('') ?? '🔄';
     }
 
     get successEmoji() {
