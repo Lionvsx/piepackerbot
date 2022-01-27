@@ -21,11 +21,11 @@ const GuildSchema = new mongoose.Schema({
     logChannelId: String,
     ticketRequestChannelId: String,
     ticketRequestMessageId: String,
+    ticketCategoryChannelId: String,
     frRoleId: String,
     enRoleId: String,
     brRoleId: String,
-    esRoleId: String,
-
+    esRoleId: String
 });
 
 module.exports = mongoose.model('Guild', GuildSchema);
