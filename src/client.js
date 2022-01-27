@@ -78,6 +78,12 @@ class client extends Client {
         if (object instanceof TextChannel) return object.send(`**${this.warningEmoji} | **${content}`)
     }
 
+    replyLoading(object, content) {
+        if (object instanceof Interaction) return object.reply({content: `**${this.loadingEmoji} | **${content}`})
+        if (object instanceof Message) return object.reply(`**${this.loadingEmoji} | **${content}`)
+        if (object instanceof TextChannel) return object.send(`**${this.loadingEmoji} | **${content}`)
+    }
+
 
     get loadingEmoji() {
         return this.emojis.cache.get('') ?? '🔄';
