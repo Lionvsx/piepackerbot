@@ -3,6 +3,9 @@ const { MessageEmbed, Permissions, MessageActionRow} = require("discord.js");
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const {createEmojiButton} = require("../../functions/messageComponents");
 
+const Guild = require('../../src/schemas/GuildSchema');
+require('dotenv').config();
+
 module.exports = class EmbedLanguage extends BaseCommand {
     constructor() {
         super('embed-language', 'config', {
@@ -12,7 +15,7 @@ module.exports = class EmbedLanguage extends BaseCommand {
         }, {
             clientPermissions: [Permissions.FLAGS.SEND_MESSAGES],
             userPermissions: [Permissions.FLAGS.ADMINISTRATOR],
-            home: false
+            home: true
         });
 
         this.builder = new SlashCommandBuilder()
@@ -28,13 +31,21 @@ module.exports = class EmbedLanguage extends BaseCommand {
 
         await client.replyLoading(interaction, "Sending embed...")
 
+        let homeGuild = await Guild.findOne({guildId: process.env.HOMEGUILDID})
+        let frRoleId = homeGuild?.frRoleId;
+        let enRoleId = homeGuild?.enRoleId;
+        let esRoleId = homeGuild?.esRoleId;
+        let brRoleId = homeGuild?.brRoleId;
+
+        if (!frRoleId || !enRoleId || !esRoleId || !brRoleId) return interaction.editReply({content: `**❌ | **You have to setup the language roles first using \`/setup\``})
+
         interaction.channel.send({
             embeds: [embed],
             components: [new MessageActionRow().addComponents([
-                createEmojiButton(`buttonRole|935524858924773416`, "Français", "PRIMARY", "🇫🇷"),
-                createEmojiButton(`buttonRole|935524818269401108`, "English", "PRIMARY", "🇬🇧"),
-                createEmojiButton(`buttonRole|935524882245115914`, "Español", "PRIMARY", "🇪🇸"),
-                createEmojiButton(`buttonRole|935524921554108426`, "Português", "PRIMARY", "🇧🇷"),
+                createEmojiButton(`buttonRole|${frRoleId}`, "Français", "PRIMARY", "🇫🇷"),
+                createEmojiButton(`buttonRole|${enRoleId}`, "English", "PRIMARY", "🇬🇧"),
+                createEmojiButton(`buttonRole|${esRoleId}`, "Español", "PRIMARY", "🇪🇸"),
+                createEmojiButton(`buttonRole|${brRoleId}`, "Português", "PRIMARY", "🇧🇷"),
             ])]
         })
 
