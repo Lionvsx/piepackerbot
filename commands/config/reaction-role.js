@@ -6,7 +6,7 @@ module.exports = class SetupCommand extends BaseCommand {
     constructor() {
         super('reaction-role', 'config', {
             usage: 'reaction-role',
-            description: 'Setup utilities for Piepacker Bot functions',
+            description: 'Create reaction based role assignment',
             categoryDisplayName: '⚙️ Config'
         }, {
             clientPermissions: [Permissions.FLAGS.ADMINISTRATOR],
