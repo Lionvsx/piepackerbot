@@ -1,4 +1,4 @@
-const {MessageButton, MessageActionRow} = require("discord.js");
+const {MessageButton, MessageActionRow, GuildEmoji, ReactionEmoji} = require("discord.js");
 module.exports = {
     createButton,
     createEmojiActionRow,
@@ -9,7 +9,7 @@ module.exports = {
  *
  * @param buttonId {String}
  * @param buttonText {String}
- * @param buttonStyle {String}
+ * @param buttonStyle {"PRIMARY" | "SECONDARY" | "SUCCESS" | "DANGER" | "LINK"}
  * @returns {MessageButton}
  */
 function createButton(buttonId, buttonText, buttonStyle) {
@@ -19,6 +19,14 @@ function createButton(buttonId, buttonText, buttonStyle) {
         .setStyle(buttonStyle);
 }
 
+/**
+ *
+ * @param buttonId {String}
+ * @param buttonText {String}
+ * @param buttonStyle {"PRIMARY" | "SECONDARY" | "SUCCESS" | "DANGER" | "LINK"}
+ * @param emoji {string | GuildEmoji | ReactionEmoji}
+ * @returns {MessageButton}
+ */
 function createEmojiButton(buttonId, buttonText, buttonStyle, emoji) {
     return new MessageButton()
         .setCustomId(buttonId)
@@ -36,7 +44,7 @@ function createEmojiActionRow(emojiArray) {
     const emojiActionRow = new MessageActionRow()
     for (const emoji of emojiArray) {
         emojiActionRow.addComponents(
-            createButton(emoji, '', 'PRIMARY', emoji)
+            createEmojiButton(emoji, '', 'PRIMARY', emoji)
         )
     }
     return emojiActionRow
