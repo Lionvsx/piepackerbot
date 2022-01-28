@@ -14,7 +14,7 @@ module.exports = class ReadyEvent extends BaseEvent {
     async run(client) {
         client.user.setPresence({
             activities: [{
-                name: "Test",
+                name: "Piepacker",
                 type: "WATCHING"
             }],
             status: "online"
