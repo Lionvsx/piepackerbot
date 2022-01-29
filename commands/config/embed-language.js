@@ -37,7 +37,7 @@ module.exports = class EmbedLanguage extends BaseCommand {
         let esRoleId = homeGuild?.esRoleId;
         let brRoleId = homeGuild?.brRoleId;
 
-        if (!frRoleId || !enRoleId || !esRoleId || !brRoleId) return interaction.editReply({content: `**❌ | **You have to setup the language roles first using \`/setup\``})
+        if (!frRoleId || !enRoleId || !esRoleId || !brRoleId) return interaction.editReply({content: `**${client.errorEmoji} | **You have to setup the language roles first using \`/setup\``})
 
         interaction.channel.send({
             embeds: [embed],
