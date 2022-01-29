@@ -36,7 +36,7 @@ module.exports = class AccessChannel extends BaseInteraction {
                 content: `**➡️ | **\`${interaction.user.username}\` joined the ticket !`
             })
             interaction.reply({
-                content: `Access granted to \`\`${accessChannel.name}\`\``,
+                content: `**${client.successEmoji} | **Access granted to \`\`${accessChannel.name}\`\``,
                 ephemeral: true
             })
         } catch (err) {

@@ -1,5 +1,6 @@
 const {MessageEmbed, TextChannel, ButtonInteraction} = require("discord.js");
 const {createEmojiActionRow} = require("./messageComponents");
+const client = require('../src/client')
 
 module.exports = {
     getButtonInteraction,
@@ -37,7 +38,7 @@ function getSelectMenuInteraction(message, timeout = 30000) {
             .then(interaction => resolve(interaction))
             .catch(() => {
                 message.edit({
-                    embeds: [new MessageEmbed().setDescription(`**❌ Interaction cancelled : \`Timed Out\`**`).setColor('#c0392b')],
+                    embeds: [new MessageEmbed().setDescription(`**${client.errorEmoji} Interaction cancelled : \`Timed Out\`**`).setColor('#c0392b')],
                     components: []
                 })
                 reject(`User Response Timed Out`)
@@ -52,7 +53,7 @@ async function reactionEmbedEmojiSelector(channel, emojiArray, embed) {
     })
     return await getButtonInteraction(channel, sentMessage).catch(() => {
         sentMessage.edit({
-            embeds: [new MessageEmbed().setDescription(`**❌ Interaction cancelled : \`Timed Out\`**`).setColor('#c0392b')],
+            embeds: [new MessageEmbed().setDescription(`**${client.errorEmoji} Interaction cancelled : \`Timed Out\`**`).setColor('#c0392b')],
             components: []
         })
     })
@@ -65,7 +66,7 @@ async function reactionEmbedSelector(channel, components, embed) {
     })
     return await getButtonInteraction(channel, sentMessage).catch(() => {
         sentMessage.edit({
-            embeds: [new MessageEmbed().setDescription(`**❌ Interaction cancelled : \`Timed Out\`**`).setColor('#c0392b')],
+            embeds: [new MessageEmbed().setDescription(`**${client.errorEmoji} Interaction cancelled : \`Timed Out\`**`).setColor('#c0392b')],
             components: []
         })
     })
@@ -73,20 +74,20 @@ async function reactionEmbedSelector(channel, components, embed) {
 
 function askForConfirmation(channel, message) {
     return new Promise(async (resolve, reject) => {
-        const interaction = await reactionEmbedEmojiSelector(channel, ['✅', '❌'], new MessageEmbed()
+        const interaction = await reactionEmbedEmojiSelector(channel, [client.successEmoji, client.errorEmoji], new MessageEmbed()
             .setTitle('⚠ Please confirm you want to execute this action ⚠')
             .setDescription(message)
             .setColor('#e67e22')).catch(errorMessage => reject(errorMessage))
 
-        if (interaction && interaction.customId === '✅') {
+        if (interaction && interaction.customId === client.successEmoji) {
             interaction.update({
-                embeds: [new MessageEmbed().setDescription(`**✅ Confirmed**`).setColor('#2ecc71')],
+                embeds: [new MessageEmbed().setDescription(`**${client.successEmoji} Confirmed**`).setColor('#2ecc71')],
                 components: []
             })
             resolve(true)
         } else if (interaction) {
             interaction.update({
-                embeds: [new MessageEmbed().setDescription(`**❌ Command cancelled**`).setColor('#c0392b')],
+                embeds: [new MessageEmbed().setDescription(`**${client.errorEmoji} Command cancelled**`).setColor('#c0392b')],
                 components: []
             })
             resolve(false)
@@ -110,7 +111,7 @@ function getUserResponse(channel, displayMessage) {
             .then(collected => {
                 resolve(collected.first().content)
             }).catch(() => {
-            sentMsg.edit(`**❌ | **Interaction cancelled : \`Timed Out\``)
+            sentMsg.edit(`**${client.errorEmoji} | **Interaction cancelled : \`Timed Out\``)
             reject('User Response Timed Out')
         })
     })

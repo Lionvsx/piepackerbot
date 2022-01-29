@@ -60,28 +60,28 @@ class client extends Client {
     warning(message, logData = undefined) {
         this.consoleLogger.log(message, 'warn', logData);
     }
-    replySuccess(object, content) {
+    async replySuccess(object, content) {
         if (object instanceof Interaction) return object.reply({content: `**${this.successEmoji} | **${content}`})
         if (object instanceof Message) return object.reply(`**${this.successEmoji} | **${content}`)
         if (object instanceof TextChannel) return object.send(`**${this.successEmoji} | **${content}`)
         if (object instanceof DMChannel) return object.send(`**${this.successEmoji} | **${content}`)
     }
 
-    replyError(object, content) {
+    async replyError(object, content) {
         if (object instanceof Interaction) return object.reply({content: `**${this.errorEmoji} | **${content}`, ephemeral: true})
         if (object instanceof Message) return object.reply(`**${this.errorEmoji} | **${content}`)
         if (object instanceof TextChannel) return object.send(`**${this.errorEmoji} | **${content}`)
         if (object instanceof DMChannel) return object.send(`**${this.errorEmoji} | **${content}`)
     }
 
-    replyWarning(object, content) {
+    async replyWarning(object, content) {
         if (object instanceof Interaction) return object.reply({content: `**${this.warningEmoji} | **${content}`, ephemeral: true})
         if (object instanceof Message) return object.reply(`**${this.warningEmoji} | **${content}`)
         if (object instanceof TextChannel) return object.send(`**${this.warningEmoji} | **${content}`)
         if (object instanceof DMChannel) return object.send(`**${this.warningEmoji} | **${content}`)
     }
 
-    replyLoading(object, content) {
+    async replyLoading(object, content) {
         if (object instanceof Interaction) return object.reply({content: `**${this.loadingEmoji} | **${content}`})
         if (object instanceof Message) return object.reply(`**${this.loadingEmoji} | **${content}`)
         if (object instanceof TextChannel) return object.send(`**${this.loadingEmoji} | **${content}`)
