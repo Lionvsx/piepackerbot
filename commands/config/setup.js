@@ -88,13 +88,14 @@ module.exports = class SetupCommand extends BaseCommand {
 
         let buttonInteraction = await getButtonInteraction(dmChannel, message, 120000).catch(errorMessage => {
             message.edit({
-                embeds: [new MessageEmbed().setDescription(`**❌ Interaction cancelled : \`Timed Out\`**`).setColor('#c0392b')],
+                embeds: [new MessageEmbed().setDescription(`**${client.errorEmoji} Interaction cancelled : \`Timed Out\`**`).setColor('#c0392b')],
                 components: []
             })
             this.log(`User ${interaction.user.tag} timed out`, errorMessage)
         })
 
         if (!buttonInteraction) return;
+        let label = buttonInteraction.component.label.slice(6);
 
         selectorReply(buttonInteraction, "🔗", `Option selected : \`${buttonInteraction.component.label}\``)
 
@@ -121,8 +122,7 @@ module.exports = class SetupCommand extends BaseCommand {
                 if (!selectedObject) return client.replyError(dmChannel, `I can't find this channel on the server \`${client.guilds.cache.get(homeGuild.guildId).name}\``)
                 homeGuild[buttonInteraction.customId] = objectId;
                 await homeGuild.save();
-
-                client.replySuccess(dmChannel, `Channel \`${selectedObject}\` has been set as \`${buttonInteraction.component.label.slice(6)}\``)
+                client.replySuccess(dmChannel, `Channel \`${selectedObject.name}\` has been set as \`${label}\``)
                 break;
             }
         }
