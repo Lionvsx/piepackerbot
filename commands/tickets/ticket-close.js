@@ -1,7 +1,7 @@
 const BaseCommand = require('../../utils/structures/BaseCommand')
 const { Permissions, MessageEmbed} = require("discord.js");
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { Ticket } = require('../../src/schemas/TicketSchema');
+const Ticket = require('../../src/schemas/TicketSchema');
 const {sleep} = require("../../functions/utilitaryFunctions");
 
 module.exports = class TicketCloseCommand extends BaseCommand {

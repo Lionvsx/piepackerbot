@@ -1,7 +1,7 @@
 const BaseCommand = require('../../utils/structures/BaseCommand')
 const { Permissions } = require("discord.js");
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { Ticket } = require('../../src/schemas/TicketSchema');
+const Ticket = require('../../src/schemas/TicketSchema');
 
 module.exports = class TicketAddCommand extends BaseCommand {
     constructor() {
@@ -43,5 +43,7 @@ module.exports = class TicketAddCommand extends BaseCommand {
             .catch(err => {
                 this.error("An error has occurred while trying to add a user to a ticket", err);
             })
+
+        await client.replySuccess(interaction, `\`${user.username}\` was added to the ticket !`)
     }
 }

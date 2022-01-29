@@ -1,7 +1,7 @@
 const BaseCommand = require('../../utils/structures/BaseCommand')
 const { Permissions } = require("discord.js");
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { Ticket } = require('../../src/schemas/TicketSchema');
+const Ticket = require('../../src/schemas/TicketSchema');
 
 module.exports = class TicketTranscriptCommand extends BaseCommand {
     constructor() {

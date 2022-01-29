@@ -1,7 +1,7 @@
 const BaseCommand = require('../../utils/structures/BaseCommand')
 const { Permissions } = require("discord.js");
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { Ticket } = require('../../src/schemas/TicketSchema');
+const Ticket = require('../../src/schemas/TicketSchema');
 
 module.exports = class TicketRemoveCommand extends BaseCommand {
     constructor() {
@@ -52,5 +52,6 @@ module.exports = class TicketRemoveCommand extends BaseCommand {
                 this.error("An error has occurred while trying to remove a user from a ticket", err);
             })
 
+        await client.replySuccess(interaction, `\`${user.username}\` was removed from the ticket !`)
     }
 }
