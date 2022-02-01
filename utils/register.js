@@ -3,6 +3,7 @@ const fs = require('fs-extra').promises;
 const BaseCommand = require('./structures/BaseCommand');
 const BaseEvent = require('./structures/BaseEvent');
 const BaseInteraction = require('./structures/BaseInteraction')
+const {Client} = require('discord.js')
 
 const ascii = require('ascii-table');
 let table = new ascii('Commands');
@@ -13,6 +14,12 @@ interactionTable.setHeading('Interaction', 'Status')
 const Logger = require('../utils/services/logger')
 const registerLogger = new Logger('register');
 
+/**
+ *
+ * @param client {Client}
+ * @param dir {string}
+ * @returns {Promise<void>}
+ */
 async function registerCommands(client, dir = '') {
   const filePath = path.join(__dirname, dir);
   const files = await fs.readdir(filePath);
@@ -33,6 +40,12 @@ async function registerCommands(client, dir = '') {
   }
 }
 
+/**
+ *
+ * @param client {Client}
+ * @param dir {String}
+ * @returns {Promise<void>}
+ */
 async function registerEvents(client, dir = '') {
   const filePath = path.join(__dirname, dir);
   const files = await fs.readdir(filePath);
@@ -49,6 +62,12 @@ async function registerEvents(client, dir = '') {
   }
 }
 
+/**
+ *
+ * @param client {Client}
+ * @param dir {String}
+ * @returns {Promise<void>}
+ */
 async function registerInteractions(client, dir = '') {
   const filePath = path.join(__dirname, dir);
   const files = await fs.readdir(filePath);
@@ -69,7 +88,10 @@ async function registerInteractions(client, dir = '') {
   }
 }
 
-async function showCommandLoad() {
+/**
+ * Display
+ */
+function showCommandLoad() {
   if (table.__rows.length !== 0) {
     console.log(table.toString());
   } else {

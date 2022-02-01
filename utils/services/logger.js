@@ -35,9 +35,9 @@ module.exports = class Logger {
      * Send info level message
      * @param message {String}
      * @param logData {JSON}
-     * @return {Promise<void>}
+     * @return {void}
      */
-    async info(message, logData = undefined) {
+    info(message, logData = undefined) {
         this.logData = logData ? logData : undefined;
         this.logger.log('info', message);
     }
@@ -45,9 +45,9 @@ module.exports = class Logger {
      * Send error level message
      * @param message {String}
      * @param logData {JSON}
-     * @return {Promise<void>}
+     * @return {void}
      */
-    async error(message, logData = undefined) {
+    error(message, logData = undefined) {
         this.logData = logData ? logData : undefined;
         this.logger.log('error', message);
     }
@@ -55,9 +55,9 @@ module.exports = class Logger {
      * Send debug level message
      * @param message {String}
      * @param logData {JSON}
-     * @return {Promise<void>}
+     * @return {void}
      */
-    async debug(message, logData = undefined) {
+    debug(message, logData = undefined) {
         this.logData = logData ? logData : undefined;
         this.logger.log('debug', message);
     }
@@ -66,9 +66,9 @@ module.exports = class Logger {
      * @param message {String}
      * @param level {String}
      * @param logData {JSON}
-     * @return {Promise<void>}
+     * @return {void}
      */
-    async log(message, level, logData = undefined) {
+    log(message, level, logData = undefined) {
         this.logData = logData ? logData : undefined;
         this.logger.log(level, message);
     }

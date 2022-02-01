@@ -14,7 +14,7 @@ module.exports = class ReadyEvent extends BaseEvent {
     async run(client) {
         client.user.setPresence({
             activities: [{
-                name: "Test",
+                name: "Piepacker",
                 type: "WATCHING"
             }],
             status: "online"
@@ -22,7 +22,7 @@ module.exports = class ReadyEvent extends BaseEvent {
         client.log(`Bot ${client.user.username} loaded and ready !`)
         await showCommandLoad()
 
-        const commands = client.commandsJSON
+        const commands = client.commandsJSON;
 
         for (const [key, value] of client.guilds.cache) {
             let guildConfig = await Guild.findOne({ guildId: key });
@@ -31,7 +31,7 @@ module.exports = class ReadyEvent extends BaseEvent {
                 client.log(`Loaded config data for guild : ${value.name}`)
             } else {
                 client.error(`Guild : ${value.name} wasn't saved in the database, starting register function`)
-                registerGuild(client, value);
+                await registerGuild(client, value);
             }
         }
         client.log('Started refreshing application (/) commands.');
