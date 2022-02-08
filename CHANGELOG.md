@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.2](https://github.com/Lionvsx/piepackerbot/compare/v2.0.1...v2.0.2) (2022-02-08)
+
+
+### Bug Fixes
+
+* **buttons:** make reply ephemeral for role assignments ([36c9a10](https://github.com/Lionvsx/piepackerbot/commit/36c9a103a100ad83209345b069d2ca2c1070156f))
+* **tickets:** remove useless ticket claim ([db35654](https://github.com/Lionvsx/piepackerbot/commit/db35654f1808c08b46c91c8efae8cc1235b89562))
+
 ### [2.0.1](https://github.com/Lionvsx/piepackerbot/compare/v2.0.0...v2.0.1) (2022-02-08)
 
 
