@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/Lionvsx/piepackerbot/compare/v2.0.0...v2.0.1) (2022-02-08)
+
+
+### Bug Fixes
+
+* **tickets:** sends error message if can't DM ([e477dc8](https://github.com/Lionvsx/piepackerbot/commit/e477dc8bffc5e296088ed2f87440079a015e6740))
+
 ## 2.0.0 (2022-02-01)
 
 
