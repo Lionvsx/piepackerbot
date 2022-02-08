@@ -19,7 +19,7 @@ module.exports = class ButtonRole extends BaseInteraction {
 
         const homeGuild = await Guild.findOne({guildId: process.env.HOMEGUILDID})
         if (!homeGuild) {
-            client.replyError("Home guild not found")
+            await client.replyError("Home guild not found")
             this.error("Home guild not found")
             return;
         }
@@ -29,7 +29,7 @@ module.exports = class ButtonRole extends BaseInteraction {
         const ticketCategory = homeDiscordGuild.channels.cache.get(homeGuild.ticketCategoryChannelId);
 
         if (!ticketCategory || !ticketRequestChannel) {
-            client.replyError(interaction, "Setup incomplete for tickets")
+            await client.replyError(interaction, "Setup incomplete for tickets")
             this.error("Ticket category or ticket request channel not found, run /setup to find out")
             return;
         }
@@ -51,8 +51,12 @@ module.exports = class ButtonRole extends BaseInteraction {
                 .addComponents(categoriesSelectMenu)]
         }).catch(err => {
             this.warn(`Cannot dm user ${interaction.user.tag}`, err)
-            client.replyError(interaction, "Please open your direct messages")
         })
+
+        if (!categoriesMessage) {
+            await client.replyError(interaction, "Please open your direct messages")
+            return;
+        }
 
         await interaction.deferUpdate();
 
@@ -118,6 +122,6 @@ module.exports = class ButtonRole extends BaseInteraction {
             guildId: interaction.guild.id,
         })
 
-        tempMsg.edit(`**${client.successEmoji} | **Ticket opened with success !`)
+        tempMsg.edit(`**${client.successEmoji} | **Ticket opened with success, please check channel \`${newTicketChannel.name}\` on discord \`${interaction.guild.name}\``)
     }
 }
